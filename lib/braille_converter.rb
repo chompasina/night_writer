@@ -4,22 +4,17 @@ require 'pry'
 
 class BrailleConverter
   attr_reader :reader, :dictionary
-  attr_accessor :line_1, :line_2, :line_3, :file_name
+  attr_accessor :line_1, :line_2, :line_3, :read_file
 
   def initialize(read_file, write_file = 'braille.txt')
-    @reader = FileReader.read_file(read_file) if file_name != nil
+    @reader = FileReader.read_file(read_file) if read_file != nil
     @alphabet = Alphabet.new
-    # @writer = FileReader.write_file(file_name, message)
+    # @writer = FileReader.write_file(read_file, message)
     @line_1 = []
     @line_2 = []
     @line_3 = []
     @output = []
   end
-
-  # def encode_file_to_braille
-  #   plain = reader.read
-  #   braille = encode_to_braille(plain)
-  # end
 
   def encode_to_braille(input)
     @output = []
@@ -56,17 +51,11 @@ class BrailleConverter
     braille_message = a + b + c
   end
 
-    # def triple_lines
-    #   multiple_lines = []
-    #   3.times { multiple_lines << @reader }
-    #   FileReader.write_file('./lib/triple_lines.txt', multiple_lines.join("\n"))
-    # end
-
-
-
-    #start with lowercase letters and characters
-    #capital letters - need to tell it to look at the character before it
-
+    def triple_lines
+      multiple_lines = []
+      3.times { multiple_lines << @reader }
+      FileReader.write_file('./lib/triple_lines.txt', multiple_lines.join("\n"))
+    end
 
 end
 #
@@ -74,13 +63,7 @@ end
 
 # def count_message(message)
 #   # binding.pry
-#   FileReader.write_file(file_name, message)
+#   FileReader.write_file(read_file, message)
 #   "#{message.length}"
 # end
 # #
-
-
-
-  #puts file.inspect ??
-  #puts file.read ??
-  # file.close ??
