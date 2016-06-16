@@ -12,9 +12,9 @@ class BrailleConverterTest < Minitest::Test
 
   def test_can_read_a_message_and_return_character_count
     skip
-    read_file = './lib/plain_message.txt'
-    bc = BrailleConverter.new(read_file)
-    reader = FileReader.read_file(read_file)
+    message_filename = './lib/plain_message.txt'
+    bc = BrailleConverter.new(message_filename)
+    reader = FileReader.message_filename(message_filename)
     message = "hi friends"
     count = bc.count_message(message)
     assert_equal "10", count
@@ -22,23 +22,23 @@ class BrailleConverterTest < Minitest::Test
 
   def test_can_open_file_and_return_count
     skip
-    read_file = './lib/plain_message.txt'
-    bc = BrailleConverter.new(read_file)
-      reader = FileReader.read_file(read_file)
+    message_filename = './lib/plain_message.txt'
+    bc = BrailleConverter.new(message_filename)
+      reader = FileReader.message_filename(message_filename)
     count = bc.count_message(message)
     assert_equal 13, count
   end
 
   def test_if_converter_can_load_file
-    read_file = './lib/hi_friends.txt'
-    bc = BrailleConverter.new(read_file)
+    message_filename = './lib/hi_friends.txt'
+    bc = BrailleConverter.new(message_filename)
     assert bc.reader
     assert bc.reader.include?("hi friends")
   end
 
   def test_can_return_three_lines
-    read_file = './lib/plain_message.txt'
-    bc = BrailleConverter.new(read_file)
+    message_filename = './lib/plain_message.txt'
+    bc = BrailleConverter.new(message_filename)
     bc.triple_lines
   end
 
@@ -67,8 +67,8 @@ class BrailleConverterTest < Minitest::Test
   end
 
   def test_it_can_output_braille_to_file
-    read_file = './lib/plain_message.txt'
-    bc = BrailleConverter.new(read_file)
+    message_filename = './lib/plain_message.txt'
+    bc = BrailleConverter.new(message_filename)
     result = bc.encode_to_braille("a! b")
     assert_equal [["0.","..",".."], ["..","00","0."], ["..", "..", ".."], ["0.","0.",".."]], result
   end
@@ -115,20 +115,20 @@ class BrailleConverterTest < Minitest::Test
   end
 
   def test_can_get_top_line
-    read_file = './lib/plain_message.txt'
+    message_filename = './lib/plain_message.txt'
     bc = BrailleConverter.new("help")
     assert_equal ["0.","0.","0.", "00"], bc.top_line
   end
 
   def test_can_get_middle_line
-    read_file = './lib/plain_message.txt'
-    bc = BrailleConverter.new(read_file)
+    message_filename = './lib/plain_message.txt'
+    bc = BrailleConverter.new(message_filename)
     assert_equal ["00", ".0", "0.", "0."], bc.middle_line
   end
 
   def test_can_get_bottom_line
-    read_file = './lib/plain_message.txt'
-    bc = BrailleConverter.new(read_file)
+    message_filename = './lib/plain_message.txt'
+    bc = BrailleConverter.new(message_filename)
     assert_equal ["..", "..", "0.", "0."], bc.bottom_line
   end
 

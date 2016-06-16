@@ -4,12 +4,12 @@ require 'pry'
 
 class BrailleConverter
   attr_reader :reader, :dictionary
-  attr_accessor :line_1, :line_2, :line_3, :read_file
+  attr_accessor :line_1, :line_2, :line_3, :message_filename
 
-  def initialize(read_file, write_file = 'braille.txt')
-    @reader = FileReader.read_file(read_file) if read_file != nil
+  def initialize(message_filename, written_filename = 'braille.txt')
+    @reader = FileReader.message_filename(message_filename) if message_filename != nil
     @alphabet = Alphabet.new
-    # @writer = FileReader.write_file(read_file, message)
+    # @writer = FileReader.written_filename(message_filename, message)
     @line_1 = []
     @line_2 = []
     @line_3 = []
@@ -54,7 +54,7 @@ class BrailleConverter
     def triple_lines
       multiple_lines = []
       3.times { multiple_lines << @reader }
-      FileReader.write_file('./lib/triple_lines.txt', multiple_lines.join("\n"))
+      FileReader.written_filename('./lib/triple_lines.txt', multiple_lines.join("\n"))
     end
 
 end
@@ -63,7 +63,7 @@ end
 
 # def count_message(message)
 #   # binding.pry
-#   FileReader.write_file(read_file, message)
+#   FileReader.written_filename(message_filename, message)
 #   "#{message.length}"
 # end
 # #
